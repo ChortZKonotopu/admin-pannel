@@ -1,0 +1,114 @@
+.App {
+  
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.bglogin {
+    background-image: url('./utils/loginbg.jpg');
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+.bgmain{
+    background-image: url('./utils/mainbg.jpg');
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+}
+
+
+ .scroll-container {
+     /* Set the maximum height to 300px */
+     overflow-y: auto;
+     /* Enable vertical scrolling */
+ }
+
+ /* Hide the scrollbar */
+ .scroll-container::-webkit-scrollbar {
+     width: 0px;
+     /* Set a width for the invisible scrollbar */
+ }
+
+ /* Track */
+ .scroll-container::-webkit-scrollbar-track {
+     background: transparent;
+     /* Set a transparent background for the track */
+ }
+
+ /* Handle */
+ .scroll-container::-webkit-scrollbar-thumb {
+     background: transparent;
+     /* Set a transparent background for the scrollbar handle */
+ }
+    .aditional-print-info{
+        display: none;
+    }
+    .grafik-container{
+        max-height: 45vh;
+    }
+ @media print and (orientation: landscape){
+     table {
+        height: 100%;
+    }
+    div{
+        width: 100%;
+    }
+    th{
+        background-color: rgb(222, 222, 222);
+        border: 2px solid black;
+    }
+    td{
+        border: 2px solid black;
+        padding: 5px 0 5px 0;
+    }
+    tr:last-child td{
+        border-bottom: 2px solid black;
+    }
+    tr td:last-child{
+        border-right: 2px solid black;
+    }
+    input {
+        width: 30px;
+    }
+    .disable-on-print{
+        display: none;
+    }
+    .on-print-container{
+        height: auto;
+        width: auto;
+        overflow-y: none;
+        overflow-x: none ;
+        margin-top: 0;
+
+    }
+    .aditional-print-info{
+        display: block;
+    }
+    .height-onprint{
+        height: auto;
+    }
+        .scroll-container {
+            /* Set the maximum height to 300px */
+            overflow-y: none;
+            /* Enable vertical scrolling */
+        }
+    .grafik-container{
+        height: 100%;
+        max-height: none;
+    }
+    .grafik-pracownik{
+        padding: 0;
+        font-size: 3px;
+        line-height: 10px;
+    }
+    td{
+        padding: 0;
+    }
+    }
+

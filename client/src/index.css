@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    select, input{
+      @apply text-[21px] border-blue border rounded-xl px-4 py-2 
+    }
+    input[type="checkbox"]{
+      @apply relative p-4 rounded-md appearance-none checked:bg-blue w-4 mr-4 focus:outline-none 
+      after:content-[''] after:w-full after:h-full after:absolute after:left-[0px] after:top-[0px] 
+      after:bg-[length:40px]
+      after:bg-no-repeat after:bg-center
+    }
+    input[type="checkbox"]:checked::after{
+      background-image: url('./utils/check.png');
+    }
+    a {
+      @apply text-[#1B1B1B] transition hover:text-blue hover:underline
+    }
+    option:disabled{
+      @apply text-gray-300
+    }
+    button{
+      @apply transition hover:opacity-80 px-2 py-1 rounded-xl
+    }
+    .button-primary{
+      @apply text-white bg-blue text-center w-[270px] py-4 text-lg
+    }
+    .button-secondary{
+      @apply px-9 py-1 
+    }
+    .button-add {
+      @apply bg-[#F1F1F1F1] flex items-center text-xl text-blue 
+    }
+    .button-add p {
+      @apply block pl-3
+    }
+    table {
+      @apply w-full rounded-xl bg-white
+    }
+    tr:first-child th:first-child{
+      @apply rounded-tl-xl
+    }
+    tr:first-child th:last-child{
+      @apply rounded-tr-xl
+    }
+    tr{
+      @apply text-center
+    }
+    td{
+      @apply border-b-2 border-gray-400 border-r-2 border-r-black py-3 text-lg
+    }
+    th{
+      @apply font-normal text-xl bg-orange py-5
+    }
+    tr:last-child td{
+      border-bottom: 0;
+    }
+    tr td:last-child{
+      border-right: 0;
+    }
+}

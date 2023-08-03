@@ -1,0 +1,20 @@
+.alert {
+    border-left-width: 8px;
+    border-color: black;
+    max-width: 300px;
+    padding: 16px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 12px;
+    /* Add any other base styles here */
+}
+
+.alert-enter-active {
+    transition: all 200ms ease-out;
+    transform: translateX(0);
+}
+
+.alert-enter {
+    transition: all 200ms ease-out;
+    transform: translateX(100%);
+}
