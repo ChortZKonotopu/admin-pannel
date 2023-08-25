@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Axios from 'axios'
 import DatePicker from 'react-datepicker';
@@ -10,6 +10,8 @@ import PhoneNumbers from '../components/PhoneNumbers';
 import DeleteGrafik from '../components/modals/DeleteGrafik';
 import { useStore } from '../store';
 import Alert from '../components/modals/Alert';
+import plus from '../utils/plus.svg';
+import AddWorker from '../components/AddWorker';
 
 export default function Grafik() {
     const { placowka } = useParams()
@@ -34,7 +36,13 @@ export default function Grafik() {
 
     const setAlert = useStore((store) => store.setAlert)
     const numbers = Array.from({ length: 31 }, (_, index) => index + 1);
-    const isLoggedIn = useStore((store) => store.header)
+    const displayHeader = useStore((store) => store.displayHeader)
+    const header = useStore((store) => store.header)
+
+    const goToMain = useStore((store) => store.goToMain)
+    const setGoToMain = useStore((store) => store.setGoToMain)
+
+    
 
     function formatDateToMMYYYY(date) {
         const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (add 1 as months are zero-based) and pad with leading zero if needed
@@ -45,13 +53,9 @@ export default function Grafik() {
     }
 
     useEffect(() => {
-        if (!isLoggedIn) {
-            console.log('1')
-            return navigate('/')
-        }
-        
+        displayHeader(true)
+
         function setTheDate() {
-            console.log(date)
             if (date.isDate) {
 
                 setSelectedDate(date.dateIs)
@@ -68,7 +72,7 @@ export default function Grafik() {
         setTheDate()
 
         // set list of work places
-        Axios.get('http://localhost:4000/workplaces')
+        Axios.get('https://admin-pannel-azms.onrender.com/workplaces')
             .then((response) => {
                 setWorkplaces(response.data)
 
@@ -86,7 +90,7 @@ export default function Grafik() {
 
     const setCurrentGrafikData = (stringDate) => {
         //get current grafik data
-        Axios.get(`http://localhost:4000/find-grafik`, {
+        Axios.get(`https://admin-pannel-azms.onrender.com/find-grafik`, {
             params: {
                 placowka: placowka,
                 date: stringDate,
@@ -158,7 +162,7 @@ export default function Grafik() {
                 grafik: updatedGrafikData, // Use the updated data with nameOfWorker included
             };
 
-            Axios.put('http://localhost:4000/update-grafik', updateGrafik)
+            Axios.put('https://admin-pannel-azms.onrender.com/update-grafik', updateGrafik)
                 .then((res) => {
                     setAlert("green", "Grafik zapisany!")
                     setLeavePage(false)
@@ -176,6 +180,7 @@ export default function Grafik() {
         if (placowkaForm !== '') {
             navigate(`/grafik/${placowkaForm}`);
             if (isReload) {
+
                 window.location.reload()
             }
         }
@@ -213,6 +218,13 @@ export default function Grafik() {
         return `@page { margin: 50px 10px 10px 10px !important; }`;
     };
 
+
+    const DeleteOption = (index) => {
+        const newOptions = grafikOpcji.filter((_, key) => key !== index);
+        setGrafikOpcji(newOptions)
+        setLeavePage(true)
+    }
+
 return (
     <div>
         <Alert/>
@@ -240,9 +252,8 @@ return (
             <DeleteGrafik placowka={placowkaForm} date={stringDate} />
         </div>
         <div className="" ref={componentRef}>
-          <div className="on-print-container mt-4 grafik-container rounded-xl overflow-y-auto scroll-container">
+          <div className="on-print-container mt-4 grafik-container rounded-xl overflow-y-auto scroll-container ">
             <table>
-                  <tbody>
                       <tr>
                           <th className='grafik-pracownik'>
                               Pracowniki
@@ -253,9 +264,20 @@ return (
                               </th>
                           ))}
                       </tr>
+                    <tbody>
                       {Object.keys(grafikData).length === 0 ? (
                           <tr>
-                              <td colSpan="32" className='h-[30vh] text-2xl'>Niema grafiku</td>
+                                <td colSpan="32" className='h-[30vh] text-2xl'>
+                                    <div className=" flex flex-col justify-center gap-4 items-center">
+                                        <p className='block'>
+                                        Niema grafiku
+                                        </p>
+                                        <Link to="/createGrafik" className='w-[370px] button-add px-[50px] py-[10px] rounded-xl hover:opacity-80 transition hover:no-underline'>
+                                            <img src={plus} alt="" />
+                                            <p>Dodaj nowy grafik</p>
+                                        </Link>
+                                    </div>
+                                </td>
                           </tr>
                       ) : (
                           Object.values(grafikData).map((grafik, workerIndex) => (
@@ -276,7 +298,21 @@ return (
                                   ))}
                               </tr>
                           ))
-                      )}
+                        )}
+                        <tr className='addworker-button'>
+                            <td colSpan="32" className=" text-2xl">
+                                <div className="flex justify-start">
+                                    {grafikData.length > 0 ? (
+                                        <AddWorker
+                                            setLeavePage={setLeavePage}
+                                            grafikData={grafikData}
+                                            setGrafikData={setGrafikData}
+                                        />
+                                    ) : null}
+
+                                </div>
+                            </td>
+                        </tr>
                   </tbody>
               </table>
           </div>
@@ -293,6 +329,7 @@ return (
                                   <tr key={key}>
                                       <td>{opcja.name}</td>
                                       <td>{opcja.value}</td>
+                                      <td className='delete-option cursor-pointer transition hover:text-red hover:underline' onClick={() => { DeleteOption(key) }}>Usunąć</td>
                                   </tr>
                               ))
                           )}
@@ -305,10 +342,10 @@ return (
                 <div className="disable-on-print basis-1/4 flex flex-col gap-5 bg-white rounded-xl p-4 justify-center items-center">
                   <input value={newOptionName} onChange={e => setNewOptionName(e.target.value)} type="text" placeholder='Nazwa opcji'/>
                   <input value={newOptionHour} onChange={e => setNewOptionHour(e.target.value)} type="text" placeholder='Godziny' />
-                  <button onClick={handleOptionAdding} className='button-primary bg-green'>Dodać</button>
+                  <button onClick={handleOptionAdding} className='button-primary bg-green '>Dodać</button>
                 </div>
                 <div className="aditional-print-info basis-2/4">
-                    <p>Placowka: {placowka}</p>
+                    <p>Placowka: {placowkaForm}</p>
                     <p>Rok/mies: {stringDate}</p>
                     <p>Telefon calodobowy(patrol CZA-TA): 694 942 500</p>
                     <p>Policja: 997</p>

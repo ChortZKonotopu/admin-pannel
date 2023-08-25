@@ -20,7 +20,7 @@ export default function Placowki() {
     }
   }, [])
   useEffect(() => {
-    Axios.get('http://localhost:4000/workplaces')
+    Axios.get('https://admin-pannel-azms.onrender.com/workplaces')
       .then((response) => {
         setWorkplaces(response.data)
         console.log(response.data)
@@ -31,7 +31,7 @@ export default function Placowki() {
 
   const deletePlacowka = (id) => {
     console.log(id)
-    Axios.delete('http://localhost:4000/deleteWorkplace/' + id)
+    Axios.delete('https://admin-pannel-azms.onrender.com/deleteWorkplace/' + id)
       .then(() => {
         setAlert("green", "Placowka usunienta!")
         const newworkplaces = workplaces.filter(place => place._id !== id)
@@ -41,13 +41,13 @@ export default function Placowki() {
 
   const findWorkplaces = () => {
     if (find !== '') {
-      Axios.get('http://localhost:4000/findWorPlaces/' + find)
+      Axios.get('https://admin-pannel-azms.onrender.com/findWorPlaces/' + find)
         .then((response) => {
           console.log(response.data)
           setWorkplaces(response.data)
         })
     } else {
-      Axios.get('http://localhost:4000/workplaces')
+      Axios.get('https://admin-pannel-azms.onrender.com/workplaces')
         .then((response) => {
           setWorkplaces(response.data)
           console.log(response.data)
@@ -70,10 +70,10 @@ export default function Placowki() {
         <table>
           <tr>
             <th className='w-[33.333%]'>
-              Placowka
+              Placówka
             </th>
             <th className='w-[33.333%]'>
-              Adres Placowki
+              Adres Placówki
             </th>
             <th className='w-[33.333%]'>
               Działania

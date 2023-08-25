@@ -17,7 +17,7 @@ export default function AddWorker({ workplaces, setWorkplaces}) {
     }
 
     const addWorkPlace = () => {
-        Axios.put('http://localhost:4000/addworkPlace', {
+        Axios.put('https://admin-pannel-azms.onrender.com/addworkPlace', {
             name: name,
             adress: adress,
         })
@@ -39,7 +39,7 @@ export default function AddWorker({ workplaces, setWorkplaces}) {
             <Alert/>
             <button className='basis-3/12 button-add ' onClick={toggleModal}>
                 <img src={plus} alt="add" />
-                <p>Dobawic placowke</p>
+                <p>Dołącz placówkę</p>
             </button>
 
             {modal && (

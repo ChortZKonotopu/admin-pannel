@@ -21,7 +21,7 @@ export default function Main() {
 
       
 
-      Axios.get('http://localhost:4000/workplaces')
+      Axios.get('https://admin-pannel-azms.onrender.com/workplaces')
         .then((response) => {
           setWorkplaces(response.data)
           console.log(response.data)

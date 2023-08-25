@@ -20,7 +20,7 @@ export default function EditWorker({ workers, setWorkers, id }) {
     }
 
     const EditWorker = () => {
-        Axios.get('http://localhost:4000/findWorker/' + id)
+        Axios.get('https://admin-pannel-azms.onrender.com/findWorker/' + id)
             .then((response) => {
                 console.log(response.data)
                 setImie(response.data[0].imie)
@@ -29,7 +29,7 @@ export default function EditWorker({ workers, setWorkers, id }) {
             })
     }
     const ChangeWorker = () => { 
-        Axios.put('http://localhost:4000/updateWorker', { newImie: imie, newNazwisko: nazwisko, newNumer: numer, id: id })
+        Axios.put('https://admin-pannel-azms.onrender.com/updateWorker', { newImie: imie, newNazwisko: nazwisko, newNumer: numer, id: id })
             .then(() => {
                 // setFriends(friends.map((val) => { return val._id == id ? { _id: id, name: newName, age: newAge } : val })
                 setWorkers(workers.map((worker) => { return worker._id == id ? { _id: id, imie: imie, nazwisko: nazwisko, numer: numer } : worker}))

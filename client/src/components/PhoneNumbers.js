@@ -20,7 +20,7 @@ export default function PhoneNumbers({ grafiks }) {
     useEffect(() => {
         if (names.length > 0) {
             
-            Axios.get('http://localhost:4000/getNumbers', {
+            Axios.get('https://admin-pannel-azms.onrender.com/getNumbers', {
                 params: {
                     names: names,
                 }
@@ -40,7 +40,7 @@ export default function PhoneNumbers({ grafiks }) {
                 <tbody>
                     {Object.keys(workers).length === 0 ? (
                         <tr>
-                            <td colSpan="2" className='h-[30vh] text-xl'>No workers found</td>
+                            <td colSpan="2" className='h-[30vh] text-xl'>Nie znaleziono pracowników</td>
                         </tr>
                     ) : (
                         workers.map((worker, key) => (

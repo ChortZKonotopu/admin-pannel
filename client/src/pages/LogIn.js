@@ -16,7 +16,7 @@ export default function LogIn() {
     let navigate = useNavigate();
 
     const loginIn = () => {
-        Axios.post("http://localhost:4000/login", { username: login, password: password })
+        Axios.post("https://admin-pannel-azms.onrender.com/login", { username: login, password: password })
             .then((res) => {
                 setIsHeader(true) 
                 return navigate('/main')

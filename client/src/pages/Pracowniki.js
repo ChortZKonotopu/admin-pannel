@@ -25,7 +25,7 @@ export default function Pracowniki() {
   }, [])
 
   useEffect(() => {
-    Axios.get('http://localhost:4000/workers')
+    Axios.get('https://admin-pannel-azms.onrender.com/workers')
       .then((response) => {
         setWorkers(response.data)
         console.log(response.data)
@@ -36,7 +36,7 @@ export default function Pracowniki() {
   
   const deletePracownik = (id) => {
     console.log(id)
-    Axios.delete('http://localhost:4000/deleteWorker/'+id)
+    Axios.delete('https://admin-pannel-azms.onrender.com/deleteWorker/'+id)
       .then(() => {
         setAlert("green", "Pracownik usunienty!")
         const newWorkers = workers.filter(worker => worker._id !== id)
@@ -46,13 +46,13 @@ export default function Pracowniki() {
 
   const findWorkers = () => {
     if (find !== '') {
-      Axios.get('http://localhost:4000/findWorker/' + find)
+      Axios.get('https://admin-pannel-azms.onrender.com/findWorker/' + find)
       .then((response) => {
         console.log(response.data)
         setWorkers(response.data)
       })
     } else {
-      Axios.get('http://localhost:4000/workers')
+      Axios.get('https://admin-pannel-azms.onrender.com/workers')
         .then((response) => {
           setWorkers(response.data)
           console.log(response.data)

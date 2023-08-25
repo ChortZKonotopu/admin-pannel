@@ -322,6 +322,15 @@ app.delete('/delete-grafik', async (req, res) => {
     }
 });
 
+app.get('/grafikOriginal', async (req, res) => {
+        console.log('grafikOriginal')
+        res.json(await Grafik.find())
+});
+                                    
+app.get('/download-backup', async (req, res) => {
+    res.download("cat.jpeg")
+})
+
 app.listen(4000);
 
 

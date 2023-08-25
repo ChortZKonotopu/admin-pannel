@@ -9,7 +9,8 @@ import Pracowniki from './pages/Pracowniki';
 import Header from './components/Header';
 import Grafik from './pages/Grafik';
 import CreateGrafik from './pages/CreateGrafik';
-
+import Backup from './pages/Backup';
+import BackupGrafik from './pages/BackupGrafik';
 
 // import plus from './utils/plus.svg'
 function App() {
@@ -27,6 +28,8 @@ function App() {
           <Route path="/main" exact element={<Main />} />
           <Route path="/grafik/:placowka/" exact element={<Grafik />} />
           <Route path="/createGrafik" exact element={<CreateGrafik />} />
+          <Route path="/baza" exact element={<Backup />} />
+          <Route path="/bazaZobacz/:backup/" exact element={<BackupGrafik />} />
         </Route>
       </Routes>
     </BrowserRouter>

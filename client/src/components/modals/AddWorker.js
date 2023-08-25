@@ -18,7 +18,7 @@ export default function AddWorker({workers, setWorkers}) {
     }
 
     const addWorker = () => {
-        Axios.put('http://localhost:4000/addworker', {
+        Axios.put('https://admin-pannel-azms.onrender.com/addworker', {
             imie: imie,
             nazwisko: nazwisko,
             numer: numer,
@@ -40,7 +40,7 @@ export default function AddWorker({workers, setWorkers}) {
             <Alert />
             <button className='basis-3/12 button-add ' onClick={toggleModal}>
                 <img src={plus} alt="add" />
-                <p>Dobawic pracownika</p>
+                <p>Dołącz pracownika</p>
             </button>
             
             {modal && (

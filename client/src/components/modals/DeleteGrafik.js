@@ -10,7 +10,7 @@ export default function DeleteGrafik({ placowka, date }) {
     const deleteGrafik = () => {
         console.log(placowka, date)
         setModule(true)
-        Axios.delete("http://localhost:4000/delete-grafik", {
+        Axios.delete("https://admin-pannel-azms.onrender.com/delete-grafik", {
             data: {
                 placowka,
                 date,

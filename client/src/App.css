@@ -1,9 +1,7 @@
-.App {
-  
-}
 
 .container {
-    max-width: 1400px;
+    max-width: 1900px;
+    padding: 0 15px 0 15px;
     margin: 0 auto;
 }
 .bglogin {
@@ -109,6 +107,12 @@
     }
     td{
         padding: 0;
+    }
+    .delete-option{
+        display: none;
+    }
+    .addworker-button {
+        display: none;
     }
     }
 

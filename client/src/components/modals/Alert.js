@@ -37,7 +37,7 @@ export default function Alert() {
     return (
         <div
             style={color === 'green' ? greenStyle : redStyle}
-            className={`z-20 cursor-pointer border-l-8 max-w-[300px] min-w-[300px] p-4 text-center text-lg rounded-xl fixed right-0 top-9 ${modal ? 'alert-enter' : 'alert-enter-active'}`}
+            className={`z-20 cursor-pointer border-l-8 max-w-[300px] min-w-[300px] p-4 text-center text-xl text-blue font-bold rounded-xl fixed right-0 top-4 ${modal ? 'alert-enter' : 'alert-enter-active'}`}
             onClick={toggleModal}
         >
             <div>{message}</div>

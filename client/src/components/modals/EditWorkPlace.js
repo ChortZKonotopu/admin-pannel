@@ -16,7 +16,7 @@ export default function EditWorker({ workplaces, setWorkplaces, id }) {
     }
 
     const EditWorker = () => {
-        Axios.get('http://localhost:4000/findWorPlaces/' + id)
+        Axios.get('https://admin-pannel-azms.onrender.com/findWorPlaces/' + id)
             .then((response) => {
                 console.log(response.data)
                 setName(response.data[0].name)
@@ -24,7 +24,7 @@ export default function EditWorker({ workplaces, setWorkplaces, id }) {
             })
     }
     const ChangeWorker = () => { 
-        Axios.put('http://localhost:4000/updateWorkPlace', { newName: name, newAdress: adress, id: id })
+        Axios.put('https://admin-pannel-azms.onrender.com/updateWorkPlace', { newName: name, newAdress: adress, id: id })
             .then(() => {
                 // setFriends(friends.map((val) => { return val._id == id ? { _id: id, name: newName, age: newAge } : val })
                 setWorkplaces(workplaces.map((worker) => { return worker._id == id ? { _id: id, name: name, adress: adress } : worker}))

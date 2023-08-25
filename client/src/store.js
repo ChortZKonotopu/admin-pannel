@@ -9,8 +9,10 @@ const store = (set) => ({
         ({ date: { isDate: isDate, dateIs: date } })),
     alertColor: "gray",
     alertMessage: "",
-    setAlert: (color, message) => set((store)=>({alertColor: color, alertMessage: message}))
-    
+    setAlert: (color, message) => set((store)=>({alertColor: color, alertMessage: message})),
+    goToMain: false,
+    setGoToMain: (val) => set((store) =>
+        ({ header: val })),
 })
 
 export const useStore = create(store);
